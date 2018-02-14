@@ -1,0 +1,30 @@
+{
+    "name": "cryonighter/tesseract-ocr",
+    "description": "Package for working with the console utility Tesseract OCR",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "type": "library",
+    "version": "0.1.0",
+    "keywords": [
+        "text recognising",
+        "tesseract",
+        "ocr"
+    ],
+    "authors": [
+        {
+            "name": "cryonighter",
+            "email": "cryonighter@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cryonighter\\Tesseract\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
