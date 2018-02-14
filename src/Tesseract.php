@@ -39,6 +39,61 @@ class Tesseract
     }
 
     /**
+     * Returns the original help message
+     *
+     * @return string
+     *
+     * @throws TesseractException
+     */
+    public function getHelp(): string
+    {
+        return $this->execute('--help');
+    }
+
+    /**
+     * @return string
+     *
+     * @throws TesseractException
+     */
+    public function getHelpPsm(): string
+    {
+        return $this->execute('--help-psm');
+    }
+
+
+    /**
+     * @return string
+     *
+     * @throws TesseractException
+     */
+    public function getHelpOem(): string
+    {
+        return $this->execute('--help-oem');
+    }
+
+    /**
+     * @return string
+     *
+     * @throws TesseractException
+     */
+    public function getVersion(): string
+    {
+        return $this->execute('--version');
+    }
+
+    /**
+     * @param TessdataDirOption $option
+     *
+     * @return string
+     *
+     * @throws TesseractException
+     */
+    public function getPrintParameters(TessdataDirOption $option): string
+    {
+        return $this->execute("--print-parameters $option");
+    }
+
+    /**
      * @param TessdataDirOption $option
      *
      * @return array
