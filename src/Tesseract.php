@@ -73,18 +73,27 @@ class Tesseract
 
         $process = proc_open($cmd, $descriptors, $pipes, null, null, ['bypass_shell' => true]);
 
-        fwrite($pipes[0], $content);
-        pclose($pipes[0]);
+        [$stdin, $stdout, $stderr] = $pipes;
 
-        $output = stream_get_contents($pipes[1]);
-        $errors = stream_get_contents($pipes[2]);
+        fwrite($stdin, $content);
+        pclose($stdin);
 
-        pclose($pipes[1]);
-        pclose($pipes[2]);
+        $output = stream_get_contents($stdout);
+        $errors = stream_get_contents($stderr);
+
+        pclose($stdout);
+        pclose($stderr);
+
+        // Waiting until the process is complete (otherwise it's impossible to get the exit code)
+        usleep(10);
 
         $processStatus = proc_get_status($process);
 
         proc_close($process);
+
+        if (true === $processStatus['running']) {
+            throw new TesseractException('Tesseract process is not completed');
+        }
 
         $exitCode = $processStatus['exitcode'];
 
